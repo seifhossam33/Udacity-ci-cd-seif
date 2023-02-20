@@ -57,7 +57,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-deps
-      - notify_on_failure:
+      - notify_on_failure
 
   build-backend:
     docker:
@@ -75,7 +75,7 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-deps
-      - notify_on_failure:
+      - notify_on_failure
 
   test-frontend:
     docker:
@@ -90,7 +90,7 @@ jobs:
             cd frontend
             npm install
             npm test
-      - notify_on_failure:
+      - notify_on_failure
                 
   test-backend:
     docker:
@@ -105,7 +105,7 @@ jobs:
              cd backend
              npm install
              npm test
-      - notify_on_failure:
+      - notify_on_failure
       
             
   scan-frontend:
@@ -123,7 +123,7 @@ jobs:
              npm audit fix --force --audit-level=critical
              npm audit fix --force --audit-level=critical 
              npm audit --audit-level=critical
-      - notify_on_failure:
+      - notify_on_failure
 
   scan-backend:
     docker:
@@ -140,7 +140,7 @@ jobs:
              npm audit fix --force --audit-level=critical
              npm audit fix --force --audit-level=critical
              npm audit --audit-level=critical
-      - notify_on_failure:
+      - notify_on_failure
 
 #   deploy-infrastructure:
 #     docker:
@@ -308,13 +308,13 @@ jobs:
 #             fi
             
   notify_on_success:
-  docker:
-    - image: cimg/base:stable
-  steps:
-    - slack/notify:
-      event: pass
-      channel: cicd-pipeline
-      template: success_tagged_deployment
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - slack/notify:
+        event: pass
+        channel: cicd-pipeline
+        template: success_tagged_deployment
 
 workflows:
   default:
@@ -330,7 +330,7 @@ workflows:
       - scan-frontend:
           requires: [build-frontend]
       - notify_on_success:
-          requires: 
+          requires:
             - test-frontend
             - test-backend
             - scan-frontend
