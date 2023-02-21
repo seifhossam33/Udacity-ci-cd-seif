@@ -8,7 +8,7 @@ commands:
         steps:
         - slack/notify:
             event: fail
-            channel: cicd-pipeline
+            channel: udacityci-cd-project
             template: basic_fail_1
 #   destroy-environment:
 #     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -314,7 +314,7 @@ jobs:
       steps:
       - slack/notify:
           event: pass
-          channel: cicd-pipeline
+          channel: udacityci-cd-project
           template: success_tagged_deployment_1
 
 workflows:
