@@ -208,6 +208,7 @@ jobs:
 
 #   configure-infrastructure:
 #     docker:
+
 #       # Docker image here that supports Ansible
 #     steps:
 #       # Checkout code from git
