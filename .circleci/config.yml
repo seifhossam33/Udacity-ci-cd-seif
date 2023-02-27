@@ -216,21 +216,21 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-    - checkout
-    - install_ansible
-    - install_awscli
-    - add_ssh_keys:
-       fingerprints: ["d2:64:f8:5c:98:5a:65:8c:57:22:18:5b:e8:55:88:01"]
-    - attach_workspace:
-        at: ~/
-    - run:
-       name: Run Configure Server Ansible play
-       command: |
-         cd .circleci/ansible
-         cat inventory.txt
+      - checkout
+      - install_ansible
+      - install_awscli
+      - add_ssh_keys:
+          fingerprints: ["d2:64:f8:5c:98:5a:65:8c:57:22:18:5b:e8:55:88:01"]
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Run Configure Server Ansible play
+          command: |
+            cd .circleci/ansible
+            cat inventory.txt
 
-         ansible-playbook -i inventory.txt configure-server.yml
-    - destroy-environment
+            ansible-playbook -i inventory.txt configure-server.yml
+      - destroy-environment
       # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
