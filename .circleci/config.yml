@@ -86,7 +86,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-deps-{{ checksum "frontend/package-lock.json" }}
-      - notify_on_failure
+      #- notify_on_failure
 
   build-backend:
     docker:
@@ -105,7 +105,7 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-deps-{{ checksum "backend/package-lock.json" }}
-      - notify_on_failure
+      #- notify_on_failure
 
 #   test-frontend:
 #     docker:
