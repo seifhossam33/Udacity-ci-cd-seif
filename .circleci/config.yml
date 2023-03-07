@@ -89,7 +89,6 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-deps-{{ checksum "frontend/package-lock.json" }}
-      #- notify_on_failure
 
   build-backend:
     docker:
@@ -320,10 +319,6 @@ jobs:
           keys: [backend-deps]
       - run:
           name: Install dependencies
-          command: |
-            # your code here
-      - run:
-          name: Deploy backend
           command: |
             cd backend
             npm install
