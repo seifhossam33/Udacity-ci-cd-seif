@@ -1,4 +1,41 @@
 ---
+- name: "update apt packages."
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: "upgrade packages"
+  become: yes
+  apt:
+    upgrade: yes
+
+
+- name: remove dependencies that are no longer required
+  become: yes
+  apt:
+    autoremove: yes
+
+- name: install python3
+  become: yes
+  apt:
+    name: python3
+
+
+- name: "install dependencies."
+  become: yes
+  apt:
+    name: ["nodejs", "npm"]
+    state: latest
+    update_cache: yes
+
+- name: "install pm2"
+  become: yes
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
+
 - name: "Creates backend app directory"
   file:
     path: ~/backend-app
@@ -8,11 +45,14 @@
   unarchive:
     src: "/home/circleci/project/backend/artifact.tar.gz"
     dest: ~/backend-app
-
-- name: "Installing Node Dependencies"
-  shell: |
-    cd ~/backend-app
-    npm i
+	
+	
+- name: install
+  npm:
+    name: install
+    path: ~/backend-app
+				 
+						  
 
 - name: "Executing Node app with PM2"
   shell: |
@@ -29,5 +69,4 @@
 - name: "Configure pm2 to start as service"
   become: true
   shell: |
-    sudo su -c "env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu"
-    pm2 save
+    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
