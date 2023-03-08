@@ -19,11 +19,9 @@
   apt:
     name: python3
 
-- name: "Installing Node Dependencies"
+
+- name: "install dependencies."
   become: yes
-  shell: |
-    cd ~/backend-app
-    npm i
   apt:
     name: ["nodejs", "npm"]
     state: latest
@@ -57,7 +55,6 @@
     cd ~/backend-app/dist
     pm2 stop default
     pm2 start main.js
-    
   register: execute_node
 
 - name: print message
@@ -65,6 +62,6 @@
     msg: "{{ execute_node.stdout_lines }}"
 
 - name: "Configure pm2 to start as service"
+  become: true
   shell: |
     env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
-    pm2 save
