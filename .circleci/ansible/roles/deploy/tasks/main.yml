@@ -50,7 +50,7 @@
   npm:
     name: install
     path: ~/backend-app
-				
+
 - name: "Executing Node app with PM2"
   shell: |
     cd ~/backend-app/dist
@@ -61,7 +61,7 @@
 - name: print message
   debug:
     msg: "{{ execute_node.stdout_lines }}"
-    
+
 - name: "Configure pm2 to start as service"
   become: true
   shell: |
