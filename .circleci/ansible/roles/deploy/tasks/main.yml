@@ -10,12 +10,12 @@
     upgrade: yes
 
 
-- name: remove dependencies that are no longer required
+- name: "remove dependencies that are no longer required"
   become: yes
   apt:
     autoremove: yes
 
-- name: install python3
+- name: "install python3"
   become: yes
   apt:
     name: python3
@@ -46,7 +46,7 @@
     src: "/home/circleci/project/backend/artifact.tar.gz"
     dest: ~/backend-app
 
-- name: install
+- name: "install"
   npm:
     name: install
     path: ~/backend-app
