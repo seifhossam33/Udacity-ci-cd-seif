@@ -43,7 +43,7 @@
 
 - name: Copy index test page
   copy:
-    src: "/home/circleci/project/artifact.tar.gz"
+    src: "/home/circleci/project/backend/artifact.tar.gz"
     dest: "/home/ubuntu/artifact.tar.gz"
 
 - name: Extract 
