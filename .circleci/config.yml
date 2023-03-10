@@ -363,22 +363,22 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
             
-            export API_URL="http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
-            if curl -s $API_URL/api/status | grep "ok"
+            export API_URL="http://${BACKEND_PUBLIC_IP}:3030"
+            if curl "${API_URL}/api/status" | grep "ok"
             then
-              exit 0
+              return 0
             else
-              exit 1
+              return 1
             fi
       - run:
           name: Frontend smoke test.
           command: |
             FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
-            if curl -s $FRONTEND_WEBSITE | grep "Welcome"
+            if curl -s ${FRONTEND_WEBSITE} | grep "Welcome"
             then
-              exit 1
+              return 1
             else
-              exit 2
+              return 1
             fi
       #- destroy-environment
       #- revert-migrations
